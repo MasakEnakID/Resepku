@@ -36,6 +36,10 @@ export default function App() {
     setRecipe(null);
 
     try {
+      if (!process.env.GEMINI_API_KEY) {
+        throw new Error("API Key tidak ditemukan. Pastikan 'GEMINI_API_KEY' sudah diatur di Environment Variables Vercel.");
+      }
+
       const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: `Berikan resep lengkap untuk masakan: ${foodName}`,
@@ -67,9 +71,13 @@ export default function App() {
 
       const result = JSON.parse(response.text || "{}");
       setRecipe(result);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Error generating recipe:", err);
-      setError("Gagal mendapatkan resep. Silakan coba lagi nanti.");
+      let msg = "Gagal mendapatkan resep.";
+      if (err?.message) {
+        msg = `Error: ${err.message}`;
+      }
+      setError(msg);
     } finally {
       setLoading(false);
     }
