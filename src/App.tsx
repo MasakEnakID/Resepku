@@ -41,7 +41,7 @@ export default function App() {
       }
 
       const response = await ai.models.generateContent({
-        model: "gemini-1.5-flash",
+        model: "gemini-flash-latest",
         contents: `Berikan resep lengkap untuk masakan: ${foodName}`,
         config: {
           responseMimeType: "application/json",
