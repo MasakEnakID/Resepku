@@ -1,0 +1,5 @@
+{
+  "name": "ResepKu",
+  "description": "Aplikasi resep sederhana bertenaga AI untuk mencari resep masakan favorit Anda.",
+  "requestFramePermissions": []
+}
